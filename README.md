@@ -3,6 +3,8 @@ FakeUsersSearch
 
 Fake Users Search - Модуль поиска и удаления фэйковых пользователей
 
+[детальное описание модуля][1]
+
 Установка
 ----------
 1. Залить содержимое папки upload в корень сайта.
@@ -12,7 +14,8 @@ Fake Users Search - Модуль поиска и удаления фэйковы
 
 Скриншот
 ---------
-![enter image description here][1]
+![enter image description here][2]
 
 
-  [1]: https://dl.dropboxusercontent.com/u/8142395/fus_1.0.png
+  [1]: http://pafnuty.name/modules/149-fake-users-search.html
+  [2]: https://dl.dropboxusercontent.com/u/8142395/fus_1.0.png
