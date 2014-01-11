@@ -13,6 +13,9 @@ email:  pafnuty10@gmail.com
 if (!defined('DATALIFEENGINE') OR !defined('LOGGED_IN')) {
 	die("Hacking attempt!");
 }
+if($member_id['user_group'] !='1') {
+	msg("error", $lang['index_denied'], $lang['index_denied']);
+}
 
 // Первым делом подключаем DLE_API как это ни странно, но в данном случаи это упрощает жизнь разработчика.
 include('engine/api/api.class.php');
