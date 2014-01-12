@@ -3,12 +3,14 @@
 =============================================================================
 Fake Users Search - Модуль поиска и удаления фэйковых пользователей
 =============================================================================
-Автор:  ПафНутиЙ 
-URL:    http://pafnuty.name/
-ICQ:    817233 
-email:  pafnuty10@gmail.com
+Автор:   ПафНутиЙ 
+URL:     http://pafnuty.name/
+twitter: https://twitter.com/pafnuty_name
+google+: http://gplus.to/pafnuty
+email:   pafnuty10@gmail.com
 =============================================================================
 */ 
+
 
 if (!defined('DATALIFEENGINE') OR !defined('LOGGED_IN')) {
 	die("Hacking attempt!");
@@ -35,10 +37,10 @@ $cfg = array(
 	'moduleDescr'   => 'Модуль поиска и удаления фэйковых пользователей',
 
 	// Версия модуля, для установщика
-	'moduleVersion' => '1.1',
+	'moduleVersion' => '1.2',
 
 	// Дата выпуска модуля, для установщика
-	'moduleDate'    => '09.01.2014',
+	'moduleDate'    => '12.01.2014',
 
 	// Версии DLE, поддержваемые модулем, для установщика
 	'dleVersion'    => '9.x - 10.x',
@@ -47,7 +49,7 @@ $cfg = array(
 	'allowGroups'   => '1',
 
 	// Массив с запросами, которые будут выполняться при установке
-	'queries'       => array(
+	'queries'       => array( 
 		// "SELECT * FROM " . PREFIX . "_post WHERE id = '1'",
 		// "SELECT * FROM " . PREFIX . "_usergroups"
 	),
@@ -1003,7 +1005,13 @@ function wordSpan($n = 0, $words) {
 			echo $output;
 		?>
 	<hr>
-	<div>Автор модуля: <a href="http://pafnuty.name/" target="_blank">ПафНутиЙ</a> <br> ICQ: 817233 <br> <a href="mailto:pafnuty10@gmail.com">pafnuty10@gmail.com</a></div>
+	<div>
+		Информация об авторе: <br>
+		<a href="http://pafnuty.name/" target="_blank" title="Сайт автора">ПафНутиЙ</a> <br>
+		<a href="https://twitter.com/pafnuty_name" target="_blank" title="Twitter">@pafnuty_name</a> <br>
+		<a href="http://gplus.to/pafnuty" target="_blank" title="google+">+Павел</a> <br>
+		<a href="mailto:pafnuty10@gmail.com" title="email автора">pafnuty10@gmail.com</a>
+	</div>
 	</section> 	
 </body>
 </html>

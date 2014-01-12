@@ -3,12 +3,14 @@
 =============================================================================
 Fake Users Search - Модуль поиска и удаления фэйковых пользователей
 =============================================================================
-Автор:  ПафНутиЙ 
-URL:    http://pafnuty.name/
-ICQ:    817233 
-email:  pafnuty10@gmail.com
+Автор:   ПафНутиЙ 
+URL:     http://pafnuty.name/
+twitter: https://twitter.com/pafnuty_name
+google+: http://gplus.to/pafnuty
+email:   pafnuty10@gmail.com
 =============================================================================
-*/
+*/ 
+
 
 // Первым делом подключаем DLE_API как это ни странно, но в данном случаи это упрощает жизнь разработчика.
 include('engine/api/api.class.php');
@@ -28,10 +30,10 @@ $cfg = array(
 	'moduleDescr'   => 'Модуль поиска и удаления фэйковых пользователей',
 
 	// Версия модуля, для установщика
-	'moduleVersion' => '1.1',
+	'moduleVersion' => '1.2',
 
 	// Дата выпуска модуля, для установщика
-	'moduleDate'    => '09.01.2014',
+	'moduleDate'    => '12.01.2014',
 
 	// Версии DLE, поддержваемые модулем, для установщика
 	'dleVersion'    => '9.x - 10.x',
@@ -53,6 +55,9 @@ $cfg = array(
 
 );
 
+// Определяем кодировку.
+$fileCharset = chasetConflict($cfg);
+
 // Шаги установки модуля
 $steps = <<<HTML
 <div class="descr">
@@ -65,7 +70,7 @@ HTML;
 
 
 function installer() {
-	global $config, $dle_api, $cfg, $steps;
+	global $config, $dle_api, $cfg, $steps, $fileCharset;
 
 	$output = '';
 
@@ -192,15 +197,52 @@ HTML;
 
 	}
 
+	// Если руки пользователя кривые, или он просто забыл перекодировать файлы - скажем ему об этом.
+	if ($fileCharset['conflict']) {
+		$output = '<h2 class="red ta-center">Ошибка!</h2><p class="alert">Кодировка файла установщика (<b>' . $fileCharset['charset'] . '</b>) не совпадает с кодировкой сайта (<b>' . $config['charset'] . '</b>). <br />Установка не возможна. <br />Перекодируйте все php файлы модуля и запустите установщик ещё раз.</p> <hr />';
+	}
+
 	// Функция возвращает то, что должно быть выведено
 	return $output;
+}
+
+/**
+ * Отлавливаем данные о кодировке файла (utf-8 или windows-1251);
+ * @param  string $string - строка (или массив), в которой требуется определить кодировку.
+ *
+ * @return array          - возвращает массив с определением конфликта кодировки строки и сайта, а так же сму кодировку строки.
+ */
+function chasetConflict($string) {
+	global $config;
+	if (is_array($string)) {
+		$string = implode(' ', $string);
+	}
+	$detect = preg_match(
+		'%(?:
+		[\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
+		|\xE0[\xA0-\xBF][\x80-\xBF]        # excluding overlongs
+		|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2} # straight 3-byte
+		|\xED[\x80-\x9F][\x80-\xBF]        # excluding surrogates
+		|\xF0[\x90-\xBF][\x80-\xBF]{2}     # planes 1-3
+		|[\xF1-\xF3][\x80-\xBF]{3}         # planes 4-15
+		|\xF4[\x80-\x8F][\x80-\xBF]{2}     # plane 16
+		)+%xs',
+		$string
+	);
+	$stringCharset = ($detect == '1') ? 'utf-8' : 'windows-1251';
+	$config['charset'] = strtolower($config['charset']);
+	$return = array();
+	$return['conflict'] = ($stringCharset == $config['charset']) ? false : true;
+	$return['charset'] = $stringCharset;
+
+	return $return;
 }
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="<?=$config['charset']?>">
+	<meta charset="<?=$fileCharset['charset']?>">
 	<title><?=$cfg['moduleTitle']?></title>
 	<meta name="viewport" content="width=device-width">
 	<link href="http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,cyrillic" rel="stylesheet">
@@ -273,7 +315,13 @@ HTML;
 		?>
 
 	</section> 	
-	<div>Автор модуля: <a href="http://pafnuty.name/" target="_blank">ПафНутиЙ</a> <br> ICQ: 817233 <br> <a href="mailto:pafnuty10@gmail.com">pafnuty10@gmail.com</a></div>
+	<div>
+		Информация об авторе: <br>
+		<a href="http://pafnuty.name/" target="_blank" title="Сайт автора">ПафНутиЙ</a> <br>
+		<a href="https://twitter.com/pafnuty_name" target="_blank" title="Twitter">@pafnuty_name</a> <br>
+		<a href="http://gplus.to/pafnuty" target="_blank" title="google+">+Павел</a> <br>
+		<a href="mailto:pafnuty10@gmail.com" title="email автора">pafnuty10@gmail.com</a>
+	</div>
 
 	<!-- scripts -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
