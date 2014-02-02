@@ -19,3 +19,6 @@ Fake Users Search - Модуль поиска и удаления фэйковы
 
   [1]: http://pafnuty.name/modules/149-fake-users-search.html
   [2]: https://dl.dropboxusercontent.com/u/8142395/fus_1.0.png
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pafnuty/fakeuserssearch/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
