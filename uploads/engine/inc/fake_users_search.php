@@ -37,10 +37,10 @@ $cfg = array(
 	'moduleDescr'   => 'Модуль поиска и удаления фэйковых пользователей',
 
 	// Версия модуля, для установщика
-	'moduleVersion' => '1.2',
+	'moduleVersion' => '1.3',
 
 	// Дата выпуска модуля, для установщика
-	'moduleDate'    => '12.01.2014',
+	'moduleDate'    => '05.04.2014',
 
 	// Версии DLE, поддержваемые модулем, для установщика
 	'dleVersion'    => '9.x - 10.x',
@@ -178,7 +178,7 @@ function searchFakeUser() {
 			<div class="form-field clearfix">
 				<div class="lebel">Интервал между регистрацией и последним посещением</div>
 				<div class="control">
-					<input type="text" name="lastdate_interval" value="{$lastdate_interval}" style="width: 50px;" class="not-oneday"> <small>(дни)</small> <span class="ttp mini" title="Указывается временной интервал между регистрацией и последним посещением (в днях). Иногда боты ещё полдня висят на сайте, или заходят на сайт через некоторое время после регистрации.">?</span>
+					<input type="text" name="lastdate_interval" value="{$lastdate_interval}" style="width: 50px;" class="not-oneday"> <small>(сек)</small> <span class="ttp mini" title="Указывается временной интервал между регистрацией и последним посещением (в секундах). Иногда боты ещё некоторое время висят на сайте, или заходят на сайт через некоторое время после регистрации.">?</span>
 				</div>
 			</div>
 			<div class="form-field clearfix">
@@ -565,6 +565,7 @@ HTML;
 		$query = "SELECT " . $fields . " FROM " . USERPREFIX . "_users WHERE " . $where . " AND user_id != '1' ORDER BY " . $order_by . " LIMIT " . $start_from . ", " . $user_per_page;
 		$query_count = "SELECT COUNT(*) as count FROM " . USERPREFIX . "_users WHERE " . $where . " AND user_id != '1'";
 		$result_count = $db->super_query($query_count);
+		
 
 		$all_count_user = $result_count['count'];
 
